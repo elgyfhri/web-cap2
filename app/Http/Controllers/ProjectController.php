@@ -22,8 +22,8 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $this->validated($request);
-        $data['image'] = $request->hasFile('image') ? $request->file('image')->store('projects', 'public') : null;
-        $data['images'] = collect($request->file('images', []))->map(fn ($file) => $file->store('projects/gallery', 'public'))->all();
+        $data['image'] = $request->hasFile('image') ? $request->file('image')->store('projects', 'web_public') : null;
+        $data['images'] = collect($request->file('images', []))->map(fn ($file) => $file->store('projects/gallery', 'web_public'))->all();
         $ambassadors = $data['ambassador_ids'];
         unset($data['ambassador_ids']);
         $project = Project::create($data);
@@ -40,17 +40,17 @@ class ProjectController extends Controller
     {
         $data = $this->validated($request);
         if ($request->hasFile('image')) {
-            if ($project->image) Storage::disk('public')->delete($project->image);
-            $data['image'] = $request->file('image')->store('projects', 'public');
+            if ($project->image) Storage::disk('web_public')->delete($project->image);
+            $data['image'] = $request->file('image')->store('projects', 'web_public');
         }
         $ambassadors = $data['ambassador_ids'];
         unset($data['ambassador_ids']);
         $remainingImages = collect($project->images ?? [])->reject(function ($image) use ($request) {
             if (!in_array($image, $request->input('remove_images', []), true)) return false;
-            Storage::disk('public')->delete($image);
+            Storage::disk('web_public')->delete($image);
             return true;
         })->values()->all();
-        $newImages = collect($request->file('images', []))->map(fn ($file) => $file->store('projects/gallery', 'public'))->all();
+        $newImages = collect($request->file('images', []))->map(fn ($file) => $file->store('projects/gallery', 'web_public'))->all();
         $data['images'] = array_values(array_merge($remainingImages, $newImages));
         $project->update($data);
         $project->ambassadors()->sync($ambassadors);
@@ -59,7 +59,7 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
-        if ($project->image) Storage::disk('public')->delete($project->image);
+        if ($project->image) Storage::disk('web_public')->delete($project->image);
         $project->delete();
         return back()->with('success', 'Project dihapus.');
     }

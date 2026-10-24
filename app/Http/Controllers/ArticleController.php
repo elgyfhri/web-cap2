@@ -13,7 +13,7 @@ class ArticleController extends Controller
     {
         $request->validate(['image' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120']);
 
-        return response()->json(['url' => asset('storage/'.$request->file('image')->store('articles', 'public'))]);
+        return response()->json(['url' => asset('storage/'.$request->file('image')->store('articles', 'web_public'))]);
     }
 
     public function create()
@@ -27,7 +27,7 @@ class ArticleController extends Controller
         $data['slug'] = Str::slug($data['title']).'-'.Str::lower(Str::random(5));
         $data['is_published'] = $request->boolean('is_published');
         $data['published_at'] = $data['is_published'] ? now() : null;
-        $data['image'] = $request->hasFile('image') ? $request->file('image')->store('articles/covers', 'public') : null;
+        $data['image'] = $request->hasFile('image') ? $request->file('image')->store('articles/covers', 'web_public') : null;
         Article::create($data);
 
         return redirect()->route('admin.articles.index')->with('success', 'Artikel dibuat.');
@@ -44,8 +44,8 @@ class ArticleController extends Controller
         $data['is_published'] = $request->boolean('is_published');
         $data['published_at'] = $data['is_published'] ? ($article->published_at ?? now()) : null;
         if ($request->hasFile('image')) {
-            if ($article->image && !str_starts_with($article->image, 'http')) Storage::disk('public')->delete($article->image);
-            $data['image'] = $request->file('image')->store('articles/covers', 'public');
+            if ($article->image && !str_starts_with($article->image, 'http')) Storage::disk('web_public')->delete($article->image);
+            $data['image'] = $request->file('image')->store('articles/covers', 'web_public');
         } else {
             unset($data['image']);
         }
