@@ -1,0 +1,5 @@
+@extends('admin.index')
+@php($heading = 'Artikel')
+@php($createUrl = route('admin.articles.create'))
+@php($editRoute = 'admin.articles.edit')
+@php($deleteRoute = 'admin.articles.destroy')
