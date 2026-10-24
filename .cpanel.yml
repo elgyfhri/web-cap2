@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/biot9799/public_html/CAP_2/
+    - /bin/cp -R * $DEPLOYPATH
