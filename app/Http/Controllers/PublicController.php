@@ -38,7 +38,7 @@ class PublicController extends Controller
         $disciplines = Ambassador::where('is_published', true)->whereNotNull('discipline')->select('discipline')->distinct()->orderBy('discipline')->pluck('discipline');
         $statuses = Ambassador::where('is_published', true)->whereNotNull('status')->select('status')->distinct()->orderBy('status')->pluck('status');
 
-        return view('public.ambassadors', ['ambassadors' => $query->orderBy('id')->get(), 'selectedDiscipline' => $cluster ? str_replace('-', ' ', $cluster) : '', 'disciplines' => $disciplines, 'statuses' => $statuses]);
+        return view('public.ambassadors', ['ambassadors' => $query->orderByRaw("CASE WHEN LOWER(name) = 'muhamad elgy fahri hidayat' THEN 0 ELSE 1 END")->orderBy('id')->get(), 'selectedDiscipline' => $cluster ? str_replace('-', ' ', $cluster) : '', 'disciplines' => $disciplines, 'statuses' => $statuses]);
     }
 
     public function cluster(string $cluster)
