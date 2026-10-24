@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost/CAP-2/PROJECT-CAP%20-FIX/CAP2/CAP_2/public'),
 
     /*
     |--------------------------------------------------------------------------
