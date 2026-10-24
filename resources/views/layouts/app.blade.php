@@ -23,8 +23,7 @@
         </nav>
         <div class="flex items-center gap-3">
             <a href="{{ route('articles.index') }}" class="hidden xl:inline-flex items-center justify-center px-4 py-2.5 rounded-xl border border-outline-variant text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-all">Unduh Booklet Profil</a>
-            <a href="{{ route('ambassadors.index') }}" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-primary text-on-primary text-sm font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-primary-container transition-all">Ajak Kolaborasi</a>
-            <a href="{{ route('login') }}" aria-label="Admin" class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary ring-2 ring-secondary-fixed/60"><span class="material-symbols-outlined text-lg">person</span></a>
+
         </div>
     </div>
 </header>
