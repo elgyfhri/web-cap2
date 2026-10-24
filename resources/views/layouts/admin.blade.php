@@ -8,6 +8,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#006948','primary-container':'#00855d','secondary-fixed':'#6ffbbe','surface:'#faf8ff','surface-container':'#eaedff','surface-container-low':'#f2f3ff','surface-container-lowest':'#ffffff','on-surface':'#131b2e','on-surface-variant':'#3d4a42','outline':'#6d7a72','outline-variant':'#bccac0','line':'#bccac0','muted':'#6d7a72'}}}}</script>
+<script>document.addEventListener('change',function(event){if(event.target.type !== 'file') return;const files=[...event.target.files];if(files.some(file=>file.size > 3 * 1024 * 1024)){alert('Ukuran gambar maksimal 3MB.');event.target.value='';}});</script>
 </head>
 <body class="bg-surface text-on-surface antialiased" style="font-family:'Plus Jakarta Sans',sans-serif">
 <div class="min-h-screen lg:flex">
@@ -19,5 +20,6 @@
 </aside>
 <main class="w-full lg:ml-64 min-h-screen"><header class="h-20 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/40 px-5 lg:px-10 flex items-center justify-between sticky top-0 z-20"><div><p class="text-[11px] uppercase tracking-wider text-[#006948] font-bold">Champion Ambassador Project</p><h1 class="text-lg font-bold mt-0.5">Panel Administrasi</h1></div><div class="flex items-center gap-3"><div class="hidden sm:block text-right"><p class="text-sm font-bold">{{ auth()->user()->name }}</p><p class="text-xs text-on-surface-variant capitalize">{{ auth()->user()->role }}</p></div><div class="w-10 h-10 rounded-full bg-[#006948] text-white flex items-center justify-center font-bold">{{ strtoupper(substr(auth()->user()->name,0,1)) }}</div></div></header><div class="p-5 lg:p-10">@yield('content')</div></main>
 </div>
+@if($errors->any())<script>alert(@json($errors->first()));</script>@endif
 </body>
 </html>

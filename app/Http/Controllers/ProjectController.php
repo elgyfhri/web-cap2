@@ -72,7 +72,7 @@ class ProjectController extends Controller
             'type' => 'required|in:Project Mandiri,Project Bersama',
             'description' => 'nullable|string',
             'link' => 'nullable|url|max:2000',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120','images' => 'nullable|array','images.*' => 'image|mimes:jpg,jpeg,png,webp|max:5120','remove_images' => 'nullable|array',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072','images' => 'nullable|array','images.*' => 'image|mimes:jpg,jpeg,png,webp|max:3072','remove_images' => 'nullable|array',
             'is_published' => 'boolean',
         ]);
         if ($data['type'] === 'Project Mandiri' && count($data['ambassador_ids']) !== 1) {

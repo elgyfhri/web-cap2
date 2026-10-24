@@ -17,7 +17,7 @@ class AmbassadorController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate(['name' => 'required|string|max:255', 'title' => 'nullable|string|max:255', 'discipline' => 'nullable|string|max:255', 'cluster' => 'required|string|in:Desain grafis,Programmer,Fotografi,IoT dan jaringan,Videografi,Digital marketing,Arsitektur dan interior,Data analyst,Otomotif', 'bio' => 'nullable|string', 'whatsapp' => 'nullable|string|max:30', 'instagram' => 'nullable|string|max:255', 'skills' => 'nullable|array', 'skills.*' => 'string|max:100', 'project_name' => 'nullable|string|max:255', 'project_description' => 'nullable|string', 'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120', 'is_published' => 'boolean']);
+        $data = $request->validate(['name' => 'required|string|max:255', 'title' => 'nullable|string|max:255', 'discipline' => 'nullable|string|max:255', 'cluster' => 'required|string|in:Desain grafis,Programmer,Fotografi,IoT dan jaringan,Videografi,Digital marketing,Arsitektur dan interior,Data analyst,Otomotif', 'bio' => 'nullable|string', 'whatsapp' => 'nullable|string|max:30', 'instagram' => 'nullable|string|max:255', 'skills' => 'nullable|array', 'skills.*' => 'string|max:100', 'project_name' => 'nullable|string|max:255', 'project_description' => 'nullable|string', 'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072', 'is_published' => 'boolean']);
         $data['slug'] = Str::slug($data['name']).'-'.Str::lower(Str::random(5));
         $data['skills'] = $this->skills($request);
         $data['image'] = $request->hasFile('image') ? $request->file('image')->store('participants', 'web_public') : null;
@@ -33,7 +33,7 @@ class AmbassadorController extends Controller
 
     public function update(Request $request, Ambassador $ambassador)
     {
-        $data = $request->validate(['name' => 'required|string|max:255', 'title' => 'nullable|string|max:255', 'discipline' => 'nullable|string|max:255', 'cluster' => 'required|string|in:Desain grafis,Programmer,Fotografi,IoT dan jaringan,Videografi,Digital marketing,Arsitektur dan interior,Data analyst,Otomotif', 'bio' => 'nullable|string', 'whatsapp' => 'nullable|string|max:30', 'instagram' => 'nullable|string|max:255', 'skills' => 'nullable|array', 'skills.*' => 'string|max:100', 'project_name' => 'nullable|string|max:255', 'project_description' => 'nullable|string', 'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120', 'is_published' => 'boolean']);
+        $data = $request->validate(['name' => 'required|string|max:255', 'title' => 'nullable|string|max:255', 'discipline' => 'nullable|string|max:255', 'cluster' => 'required|string|in:Desain grafis,Programmer,Fotografi,IoT dan jaringan,Videografi,Digital marketing,Arsitektur dan interior,Data analyst,Otomotif', 'bio' => 'nullable|string', 'whatsapp' => 'nullable|string|max:30', 'instagram' => 'nullable|string|max:255', 'skills' => 'nullable|array', 'skills.*' => 'string|max:100', 'project_name' => 'nullable|string|max:255', 'project_description' => 'nullable|string', 'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072', 'is_published' => 'boolean']);
         $data['skills'] = $this->skills($request);
         if ($request->hasFile('image')) {
             if ($ambassador->image) Storage::disk('web_public')->delete($ambassador->image);

@@ -11,7 +11,7 @@ class ArticleController extends Controller
 {
     public function uploadImage(Request $request)
     {
-        $request->validate(['image' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120']);
+        $request->validate(['image' => 'required|image|mimes:jpg,jpeg,png,webp|max:3072']);
 
         return response()->json(['url' => asset('storage/'.$request->file('image')->store('articles', 'web_public'))]);
     }
@@ -23,7 +23,7 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate(['title' => 'required|string|max:255', 'excerpt' => 'nullable|string|max:500', 'body' => 'nullable|string', 'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120', 'is_published' => 'boolean', 'published_at' => 'nullable|date']);
+        $data = $request->validate(['title' => 'required|string|max:255', 'excerpt' => 'nullable|string|max:500', 'body' => 'nullable|string', 'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072', 'is_published' => 'boolean', 'published_at' => 'nullable|date']);
         $data['slug'] = Str::slug($data['title']).'-'.Str::lower(Str::random(5));
         $data['is_published'] = $request->boolean('is_published');
         $data['published_at'] = $data['is_published'] ? now() : null;
@@ -40,7 +40,7 @@ class ArticleController extends Controller
 
     public function update(Request $request, Article $article)
     {
-        $data = $request->validate(['title' => 'required|string|max:255', 'excerpt' => 'nullable|string|max:500', 'body' => 'nullable|string', 'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120', 'is_published' => 'boolean', 'published_at' => 'nullable|date']);
+        $data = $request->validate(['title' => 'required|string|max:255', 'excerpt' => 'nullable|string|max:500', 'body' => 'nullable|string', 'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072', 'is_published' => 'boolean', 'published_at' => 'nullable|date']);
         $data['is_published'] = $request->boolean('is_published');
         $data['published_at'] = $data['is_published'] ? ($article->published_at ?? now()) : null;
         if ($request->hasFile('image')) {
