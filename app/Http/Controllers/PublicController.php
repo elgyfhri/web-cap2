@@ -26,19 +26,23 @@ class PublicController extends Controller
     public function ambassadors(?string $cluster = null)
     {
         $query = Ambassador::where('is_published', true);
-        if ($cluster !== null) { $clusterName = Ambassador::where('is_published', true)->whereNotNull('cluster')->get()->first(fn ($item) => Str::slug($item->cluster) === $cluster)?->cluster; $query->where('cluster', $clusterName ?? $cluster); }
+        $clusterName = null;
+        if ($cluster !== null) {
+            $clusterName = Ambassador::where('is_published', true)->whereNotNull('cluster')->get()->first(fn ($item) => Str::slug($item->cluster) === $cluster)?->cluster;
+            $query->where('cluster', $clusterName ?? $cluster);
+        }
         $search = trim((string) request('q'));
         if ($search !== '') {
             $query->where(function ($q) use ($search) {
                 $like = '%'.$search.'%';
-                $q->where('name', 'like', $like)->orWhere('title', 'like', $like)->orWhere('discipline', 'like', $like)->orWhere('city', 'like', $like)->orWhere('project_name', 'like', $like)->orWhere('project_description', 'like', $like);
+                $q->where('name', 'like', $like)->orWhere('title', 'like', $like)->orWhere('cluster', 'like', $like)->orWhere('discipline', 'like', $like)->orWhere('city', 'like', $like)->orWhere('project_name', 'like', $like)->orWhere('project_description', 'like', $like);
             });
         }
         if (request('status')) $query->where('status', request('status'));
-        $disciplines = Ambassador::where('is_published', true)->whereNotNull('discipline')->select('discipline')->distinct()->orderBy('discipline')->pluck('discipline');
+        $clusters = Ambassador::where('is_published', true)->whereNotNull('cluster')->select('cluster')->distinct()->orderBy('cluster')->pluck('cluster');
         $statuses = Ambassador::where('is_published', true)->whereNotNull('status')->select('status')->distinct()->orderBy('status')->pluck('status');
 
-        return view('public.ambassadors', ['ambassadors' => $query->orderByRaw("CASE WHEN LOWER(name) = 'muhamad elgy fahri hidayat' THEN 0 ELSE 1 END")->orderBy('id')->get(), 'selectedDiscipline' => $cluster ? str_replace('-', ' ', $cluster) : '', 'disciplines' => $disciplines, 'statuses' => $statuses]);
+        return view('public.ambassadors', ['ambassadors' => $query->orderByRaw("CASE WHEN LOWER(name) = 'muhamad elgy fahri hidayat' THEN 0 ELSE 1 END")->orderBy('id')->get(), 'selectedCluster' => $clusterName ?? '', 'clusters' => $clusters, 'statuses' => $statuses]);
     }
 
     public function cluster(string $cluster)
