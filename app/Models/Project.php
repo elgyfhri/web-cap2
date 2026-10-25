@@ -9,7 +9,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'type', 'description', 'link', 'image', 'images', 'is_published'];
+    protected $fillable = ['title', 'type', 'description', 'link', 'images', 'is_published'];
 
     public function ambassadors()
     {
