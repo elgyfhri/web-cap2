@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{ $title ?? 'CAP-2 Admin' }}</title>
+<link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}?v=2">
+<link rel="alternate icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2">
+<link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}?v=2">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
