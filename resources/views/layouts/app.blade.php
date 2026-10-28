@@ -25,7 +25,6 @@
             <a href="{{ route('articles.index') }}" class="px-4 py-2 text-sm rounded-lg {{ request()->routeIs('articles.*') ? 'bg-secondary-fixed/40 text-primary font-semibold' : 'text-on-surface-variant hover:text-on-surface' }}">Artikel & Warta</a>
         </nav>
         <div class="flex items-center gap-3">
-            <a href="{{ route('articles.index') }}" class="hidden xl:inline-flex items-center justify-center px-4 py-2.5 rounded-xl border border-outline-variant text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-all">Unduh Booklet Profil</a>
 
          </div>
      </div><nav x-show="open" x-transition class="md:hidden border-t border-outline-variant/40 bg-surface-container-lowest px-5 py-4 space-y-1"><a href="{{ route('home') }}" class="block px-4 py-3 rounded-xl text-sm font-semibold">Beranda</a><a href="{{ route('ambassadors.index') }}" class="block px-4 py-3 rounded-xl text-sm font-semibold">25 Champ & Proyek</a><a href="{{ route('articles.index') }}" class="block px-4 py-3 rounded-xl text-sm font-semibold">Artikel & Warta</a></nav>
