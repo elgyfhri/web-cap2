@@ -7,7 +7,7 @@
             <div class="lg:col-span-8 flex flex-col gap-3">
                 <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-fixed/40 text-on-secondary-fixed-variant w-fit text-xs uppercase tracking-wider font-extrabold"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>Kolektif Talenta Nusantara 2025</span>
                 <h1 class="text-[2.75rem] md:text-[3.5rem] font-bold text-on-surface tracking-tight leading-[1.1]">Wadah <span class="text-primary underline decoration-secondary-container decoration-wavy decoration-2 underline-offset-8">25 Talenta Muda</span>, Puluhan Inovasi untuk Masa Depan Indonesia</h1>
-                <p class="text-lg text-on-surface-variant max-w-2xl pt-1">Dari riset IoT, konversi motor listrik, arsitektur gempa, hingga AI rantai pasok—eksplorasi karya nyata anak muda lintas disiplin Nusantara.</p>
+                <p class="text-lg text-on-surface-variant max-w-2xl pt-1">Dari pemantauan infus berbasis IoT, hidroponik pintar, desain arsitektur dan interior, hingga analisis data UMKM—eksplorasi karya nyata anak muda lintas disiplin Nusantara.</p>
             </div>
             <div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end lg:items-end"><a href="{{ route('ambassadors.index') }}" class="w-full sm:w-auto lg:w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-primary text-white font-bold shadow-md hover:bg-primary-container transition-all">Jelajahi 25 Peserta <span class="material-symbols-outlined text-lg">arrow_forward</span></a></div>
         </div>
